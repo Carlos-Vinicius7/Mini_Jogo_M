@@ -7,14 +7,27 @@
     font-family: 'Jersey 10', sans-serif;
 }
 
+body {
+    background-image: url('../Img/tela-inicial.png'); /* Altere aqui para a cor escolhida */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Garante que o fundo ocupe a tela toda */
+}
+
 .game-box {
     width: 80%;
     height: 500px;
-    border: 2px solid #000;
+    border: 7px solid #000000;
     margin: 50px auto;
     position: relative;
     overflow: hidden;
     background: linear-gradient(to bottom, #87CEEB, #fff);
+    border-radius: 10px;
+
 }
 
 .pipe {
@@ -100,20 +113,26 @@
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    background-color: rgba(255, 242, 0, 0.538);
-    padding: 20px;
-    border-radius: 10px;
+    background-color: none; /* Removido o fundo para transparência */
+    padding: 40px; /* Aumentei o padding para ficar mais espaçoso */
+    border-radius: 20px;
     display: none;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    width: 300px; /* Defina uma largura fixa ou min-width */
 }
 
-i {
-    font-size: 30px;
-    color: #000;
-    cursor: pointer;
+.game-over h1 {
+    font-size: 60px; /* Aumente o tamanho do texto do título */
+    line-height: 1;
+    margin-bottom: 20px;
 }
 
-button {
+/* Ajuste o tamanho do botão para acompanhar o novo tamanho da div */
+.game-over i {
+    font-size: 80px; 
+    
+}
+
+.game-over button {
     background: none;
     border: none;
     outline: none;
