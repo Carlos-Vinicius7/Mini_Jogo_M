@@ -6,11 +6,30 @@ const highScoreDisplay = document.getElementById('high-score-display');
 const gameOverScreen = document.getElementById('game-over');
 const restartButton = document.getElementById('restart-button');
 
+// Criar os objetos de áudio (certifique-se que estão na pasta ./Audio/)
+const jumpSound = new Audio('./Audio/jump.wav');
+const gameOverSound = new Audio('./Audio/game-over.mp3');
+const bgMusic = new Audio('./Audio/music.mp3');
+
+// Configurar música de fundo
+bgMusic.loop = true;
+bgMusic.volume = 0.5;
+
+// Função para iniciar o áudio na primeira interação
+const startAudio = () => {
+    bgMusic.play().catch(e => console.log("Aguardando interação do usuário"));
+    document.removeEventListener('keydown', startAudio);
+    document.removeEventListener('click', startAudio);
+};
+
+document.addEventListener('keydown', startAudio);
+document.addEventListener('click', startAudio);
+
 // Variáveis de estado
 let isGameOver = false;
 let score = 0;
 let highScore = localStorage.getItem('dinoHighScore') || 0;
-let loop; // Variável global para armazenar o intervalo
+let loop;
 
 highScoreDisplay.innerText = `Recorde: ${highScore}`;
 
@@ -18,6 +37,9 @@ const jump = () => {
     if (isGameOver) return;
 
     mario.classList.add('jump');
+    jumpSound.currentTime = 0; // Reinicia o som caso ele já esteja tocando
+    jumpSound.play();
+    
     setTimeout(() => {
         mario.classList.remove('jump');
     }, 500);
@@ -59,6 +81,11 @@ const loopGame = () => {
                 highScoreDisplay.innerText = `Recorde: ${highScore}`;
             }
 
+            // Gerenciamento de áudio pós-derrota
+            bgMusic.pause();
+            gameOverSound.currentTime = 0;
+            gameOverSound.play();
+
             gameOverScreen.style.display = 'block';
             clearInterval(loop);
         }
@@ -71,10 +98,8 @@ const restartGame = () => {
     // Resetar posições e animações
     pipe.style.animation = 'pipe-animation 1.5s linear infinite';
     pipe.style.left = '';
-
     clouds.style.animation = 'nuvens-animation 10s linear infinite';
     clouds.style.left = '';
-
     mario.style.animation = '';
     mario.style.bottom = '0';
     mario.src = './Img/mario.gif';
@@ -85,6 +110,10 @@ const restartGame = () => {
     score = 0;
     isGameOver = false;
     currentScoreDisplay.innerText = 'Pontuação: 0';
+
+    // Reiniciar trilha sonora
+    bgMusic.currentTime = 0;
+    bgMusic.play();
 
     loopGame();
 };
