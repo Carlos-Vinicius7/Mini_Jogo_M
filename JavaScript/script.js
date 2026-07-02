@@ -46,7 +46,14 @@ const jump = () => {
 }
 
 const loopGame = () => {
+    clearInterval(loop); // garante que nunca fique mais de um loop rodando ao mesmo tempo
+
     loop = setInterval(() => {
+        if (isGameOver) { // trava extra: se o jogo já acabou, esse loop não faz mais nada
+            clearInterval(loop);
+            return;
+        }
+
         const pipePosition = pipe.offsetLeft;
         const cloudsPosition = clouds.offsetLeft;
         const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
@@ -55,8 +62,18 @@ const loopGame = () => {
         score++;
         currentScoreDisplay.innerText = `Pontuação: ${Math.floor(score / 10)}`;
 
-        // Detecção de colisão
-        if (pipePosition <= 90 && pipePosition > 0 && marioPosition < 80) {
+        // Detecção de colisão baseada na posição real dos elementos na tela,
+        // então funciona igual em qualquer tamanho de .game-box (celular, tablet, desktop)
+        const marioRect = mario.getBoundingClientRect();
+        const pipeRect = pipe.getBoundingClientRect();
+        const margem = 10; // pequena margem de tolerância pra não parecer injusto
+
+        const colidiu =
+            marioRect.right - margem > pipeRect.left &&
+            marioRect.left + margem < pipeRect.right &&
+            marioRect.bottom - margem > pipeRect.top;
+
+        if (colidiu) {
             isGameOver = true;
 
             // Parar animações
@@ -144,7 +161,10 @@ document.addEventListener('click', (e) => {
 
 // Permite reiniciar ao clicar em qualquer lugar da tela de game over
 gameOverScreen.addEventListener('click', restartGame);
-restartButton.addEventListener('click', restartGame);
+restartButton.addEventListener('click', (e) => {
+    e.stopPropagation(); // evita que o clique "borbulhe" e dispare o restartGame da div também
+    restartGame();
+});
 
 // Iniciar jogo pela primeira vez
 loopGame();
