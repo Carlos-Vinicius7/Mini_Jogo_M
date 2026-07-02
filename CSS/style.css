@@ -222,6 +222,7 @@ body {
     .pipe {
         width: 45px;
         bottom: 0;
+        animation-duration: 1.9s; /* cano um pouco mais lento no celular, mais tempo de reação */
     }
 
     .nuvens {
@@ -288,6 +289,7 @@ body {
 
     .pipe {
         width: 38px;
+        animation-duration: 2.1s;
     }
 
     .nuvens {

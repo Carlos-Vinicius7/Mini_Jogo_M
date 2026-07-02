@@ -66,7 +66,9 @@ const loopGame = () => {
         // então funciona igual em qualquer tamanho de .game-box (celular, tablet, desktop)
         const marioRect = mario.getBoundingClientRect();
         const pipeRect = pipe.getBoundingClientRect();
-        const margem = 10; // pequena margem de tolerância pra não parecer injusto
+        // No celular o Mario e o cano ficam bem menores, então uma margem maior
+        // é necessária pra não parecer injusto (senão quase todo "quase toque" conta como batida)
+        const margem = window.matchMedia('(max-width: 480px)').matches ? 22 : 10;
 
         const colidiu =
             marioRect.right - margem > pipeRect.left &&
