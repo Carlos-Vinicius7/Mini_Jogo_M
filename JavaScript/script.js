@@ -118,6 +118,17 @@ const restartGame = () => {
     loopGame();
 };
 
+// Função auxiliar para controlar cliques duplos
+let lastClickTime = 0;
+const handleJumpClick = () => {
+    const now = Date.now();
+    // Evita pular duas vezes com um clique
+    if (now - lastClickTime > 100) {
+        lastClickTime = now;
+        jump();
+    }
+};
+
 // Eventos
 document.addEventListener('keydown', (e) => {
     if (e.code === 'Space' || e.code === 'ArrowUp') {
@@ -125,6 +136,16 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// Permite pular ao clicar na tela
+document.addEventListener('click', (e) => {
+    // Não pula se clicar no botão de restart (ele já tem seu próprio listener)
+    if (e.target !== restartButton && !isGameOver) {
+        handleJumpClick();
+    }
+});
+
+// Permite reiniciar ao clicar em qualquer lugar da tela de game over
+gameOverScreen.addEventListener('click', restartGame);
 restartButton.addEventListener('click', restartGame);
 
 // Iniciar jogo pela primeira vez

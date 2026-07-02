@@ -5,6 +5,8 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Jersey 10', sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 body {
@@ -136,4 +138,175 @@ body {
     background: none;
     border: none;
     outline: none;
+}
+
+/* Responsividade para telas menores */
+
+/* Tablets e telas médias */
+@media (max-width: 768px) {
+    .game-box {
+        width: 90%;
+        height: 400px;
+        margin: 30px auto;
+        border: 5px solid #000000;
+    }
+
+    .mario {
+        width: 120px;
+    }
+
+    .pipe {
+        width: 55px;
+    }
+
+    .nuvens {
+        width: 300px;
+    }
+
+    .score-board {
+        top: 8px;
+        left: 8px;
+        gap: 3px;
+    }
+
+    .current-score, .high-score-display {
+        font-size: 16px;
+    }
+
+    .game-over h1 {
+        font-size: 48px;
+    }
+
+    .game-over i {
+        font-size: 60px;
+    }
+
+    .game-over {
+        width: 250px;
+        padding: 30px;
+    }
+}
+
+/* Celulares e telas pequenas */
+@media (max-width: 480px) {
+    body {
+        background-size: cover;
+        padding: 10px;
+    }
+
+    .game-box {
+        width: 100%;
+        height: 300px;
+        margin: 15px auto;
+        border: 4px solid #000000;
+    }
+
+    .mario {
+        width: 80px;
+    }
+
+    .pipe {
+        width: 45px;
+        bottom: 0;
+    }
+
+    .nuvens {
+        width: 200px;
+    }
+
+    .score-board {
+        top: 6px;
+        left: 6px;
+        gap: 2px;
+    }
+
+    .current-score, .high-score-display {
+        font-size: 14px;
+    }
+
+    .game-over h1 {
+        font-size: 36px;
+        margin-bottom: 15px;
+    }
+
+    .game-over i {
+        font-size: 48px;
+    }
+
+    .game-over {
+        width: 200px;
+        padding: 20px;
+    }
+
+    @keyframes jump {
+        0%{
+            bottom: 0;
+        }
+        40%{
+            bottom: 150px;
+        }
+        50%{
+            bottom: 150px;
+        }
+        60%{
+            bottom: 150px;
+        }
+        100%{
+            bottom: 0;
+        }
+    }
+}
+
+/* Celulares muito pequenos */
+@media (max-width: 360px) {
+    .game-box {
+        height: 250px;
+    }
+
+    .mario {
+        width: 65px;
+    }
+
+    .pipe {
+        width: 38px;
+    }
+
+    .nuvens {
+        width: 150px;
+    }
+
+    .score-board {
+        top: 5px;
+        left: 5px;
+    }
+
+    .current-score, .high-score-display {
+        font-size: 12px;
+    }
+
+    .game-over h1 {
+        font-size: 28px;
+    }
+
+    .game-over i {
+        font-size: 40px;
+    }
+
+    @keyframes jump {
+        0%{
+            bottom: 0;
+        }
+        40%{
+            bottom: 120px;
+        }
+        50%{
+            bottom: 120px;
+        }
+        60%{
+            bottom: 120px;
+        }
+        100%{
+            bottom: 0;
+        }
+    }
 }
