@@ -111,6 +111,10 @@ const loopGame = () => {
 const restartGame = () => {
     gameOverScreen.style.display = 'none';
 
+    // Cancela o som de game over (caso ainda esteja tocando) antes de tudo
+    gameOverSound.pause();
+    gameOverSound.currentTime = 0;
+
     // Resetar posições e animações
     pipe.style.animation = 'pipe-animation 1.5s linear infinite';
     pipe.style.left = '';
