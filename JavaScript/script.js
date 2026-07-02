@@ -47,27 +47,17 @@ const jump = () => {
 
 const loopGame = () => {
     loop = setInterval(() => {
+        const pipePosition = pipe.offsetLeft;
+        const cloudsPosition = clouds.offsetLeft;
+        const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
+
         // Pontuação
         score++;
         currentScoreDisplay.innerText = `Pontuação: ${Math.floor(score / 10)}`;
 
-        // Detecção de colisão baseada na posição real na tela,
-        // funciona em qualquer tamanho de tela (celular, tablet, desktop)
-        const marioRect = mario.getBoundingClientRect();
-        const pipeRect = pipe.getBoundingClientRect();
-        const margem = 10; // margem de tolerância pra não parecer injusto
-
-        const colidiu =
-            marioRect.right - margem > pipeRect.left &&
-            marioRect.left + margem < pipeRect.right &&
-            marioRect.bottom - margem > pipeRect.top;
-
-        if (colidiu) {
+        // Detecção de colisão
+        if (pipePosition <= 90 && pipePosition > 0 && marioPosition < 80) {
             isGameOver = true;
-
-            const pipePosition = pipe.offsetLeft;
-            const cloudsPosition = clouds.offsetLeft;
-            const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
 
             // Parar animações
             pipe.style.animation = 'none';
@@ -80,8 +70,7 @@ const loopGame = () => {
             mario.style.bottom = `${marioPosition}px`;
 
             mario.src = './Img/game-over.png';
-            mario.style.width = '75px';
-            mario.style.marginLeft = '50px';
+            mario.classList.add('mario-dead');
 
             // Salvar recorde
             let finalScore = Math.floor(score / 10);
@@ -113,8 +102,7 @@ const restartGame = () => {
     mario.style.animation = '';
     mario.style.bottom = '0';
     mario.src = './Img/mario.gif';
-    mario.style.width = '150px';
-    mario.style.marginLeft = '0';
+    mario.classList.remove('mario-dead');
 
     // Resetar variáveis
     score = 0;

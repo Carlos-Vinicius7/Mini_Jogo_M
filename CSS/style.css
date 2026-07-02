@@ -54,6 +54,13 @@ body {
     bottom: 0;
 }
 
+/* Sprite de game-over: mesma escala do .mario normal em cada breakpoint,
+   controlada aqui em vez de via JS (para não quebrar a responsividade) */
+.mario.mario-dead {
+    width: 75px;
+    margin-left: 50px;
+}
+
 .jump {
     animation: jump 500ms ease-out;
 }
@@ -77,9 +84,6 @@ body {
 }
 
 #current-score, #high-score-display {
-    position: absolute;
-    top: 10px;
-    left: 10px;
     font-size: 20px;
     color: #646363d9;
 }
@@ -155,6 +159,11 @@ body {
         width: 120px;
     }
 
+    .mario.mario-dead {
+        width: 60px;
+        margin-left: 40px;
+    }
+
     .pipe {
         width: 55px;
     }
@@ -203,6 +212,11 @@ body {
 
     .mario {
         width: 80px;
+    }
+
+    .mario.mario-dead {
+        width: 40px;
+        margin-left: 25px;
     }
 
     .pipe {
@@ -265,6 +279,11 @@ body {
 
     .mario {
         width: 65px;
+    }
+
+    .mario.mario-dead {
+        width: 32px;
+        margin-left: 20px;
     }
 
     .pipe {
