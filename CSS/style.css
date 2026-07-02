@@ -76,7 +76,7 @@ body {
     }
 }
 
-.current-score, .high-score-display {
+#current-score, #high-score-display {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -169,7 +169,7 @@ body {
         gap: 3px;
     }
 
-    .current-score, .high-score-display {
+    #current-score, #high-score-display {
         font-size: 16px;
     }
 
@@ -220,7 +220,7 @@ body {
         gap: 2px;
     }
 
-    .current-score, .high-score-display {
+    #current-score, #high-score-display {
         font-size: 14px;
     }
 
@@ -280,7 +280,7 @@ body {
         left: 5px;
     }
 
-    .current-score, .high-score-display {
+    #current-score, #high-score-display {
         font-size: 12px;
     }
 
