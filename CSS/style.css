@@ -134,9 +134,10 @@ body {
 }
 
 .game-over h1 {
-    width: 60px;
-        height: 60px; /* Aumente o tamanho do texto do título */
-    line-height: 1;
+    width: auto;
+    height: auto;
+    font-size: 56px;
+    line-height: 1.1;
     margin-bottom: 20px;
 }
 
@@ -193,8 +194,9 @@ body {
     }
 
     .game-over h1 {
-        width: 48px;
-        height: 48px;
+        width: auto;
+        height: auto;
+        font-size: 44px;
     }
 
     .game-over svg {
