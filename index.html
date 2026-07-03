@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="./CSS/style.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
+
+    <link rel="icon" type="image/png" sizes="16x16" href="./Img/Favicon/icons8-super-mario-stickers-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./Img/Favicon/icons8-super-mario-stickers-32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./Img/Favicon/icons8-super-mario-stickers-96.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./Img/Favicon/icons8-super-mario-stickers-120.png">
+
     <title>Mario jump</title>
 </head>
 <body>
@@ -20,12 +24,18 @@
         <img src="./Img/clouds.png" class="nuvens" id="nuvens">
         
         <img src="./Img/mario.gif" class="mario" id="mario">
+        <img src="./Img/game-over.png" class="mario mario-dead" id="mario-dead" alt="">
 
         <img src="./Img/pipe.png" class="pipe" id="pipe">
         
         <div class="game-over" id="game-over">
             <h1>Game<br>Over</h1>
-            <button id="restart-button"><i class='bx bxs-caret-right-circle'></i></button>
+            <button id="restart-button" aria-label="Reiniciar">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" fill="#000000"></circle>
+                    <path d="M9.5 7.5v9l7-4.5z" fill="#ffffff"></path>
+                </svg>
+            </button>
         </div>
     </div>
     

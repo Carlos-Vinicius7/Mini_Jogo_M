@@ -54,11 +54,18 @@ body {
     bottom: 0;
 }
 
-/* Sprite de game-over: mesma escala do .mario normal em cada breakpoint,
-   controlada aqui em vez de via JS (para não quebrar a responsividade) */
+/* Sprite de game-over: elemento separado (não é mais o mesmo <img> que troca de
+   src), pra evitar o bug de alguns navegadores mobile onde trocar o src de um
+   <img> que estava tocando um GIF não atualiza a imagem exibida. Fica escondida
+   até o JS adicionar a classe "active". */
 .mario.mario-dead {
     width: 75px;
     margin-left: 50px;
+    display: none;
+}
+
+.mario.mario-dead.active {
+    display: block;
 }
 
 .jump {
@@ -127,15 +134,18 @@ body {
 }
 
 .game-over h1 {
-    font-size: 60px; /* Aumente o tamanho do texto do título */
+    width: 60px;
+        height: 60px; /* Aumente o tamanho do texto do título */
     line-height: 1;
     margin-bottom: 20px;
 }
 
-/* Ajuste o tamanho do botão para acompanhar o novo tamanho da div */
-.game-over i {
-    font-size: 80px; 
-    
+/* Ícone do botão de reiniciar: SVG embutido no HTML (não depende de CDN externo,
+   então funciona mesmo sem internet ou com bloqueio de terceiros) */
+.game-over svg {
+    width: 80px;
+    height: 80px;
+    color: #000000;
 }
 
 .game-over button {
@@ -183,11 +193,13 @@ body {
     }
 
     .game-over h1 {
-        font-size: 48px;
+        width: 48px;
+        height: 48px;
     }
 
-    .game-over i {
-        font-size: 60px;
+    .game-over svg {
+        width: 60px;
+        height: 60px;
     }
 
     .game-over {
@@ -244,8 +256,9 @@ body {
         margin-bottom: 15px;
     }
 
-    .game-over i {
-        font-size: 48px;
+    .game-over svg {
+        width: 48px;
+        height: 48px;
     }
 
     .game-over {
@@ -309,8 +322,9 @@ body {
         font-size: 28px;
     }
 
-    .game-over i {
-        font-size: 40px;
+    .game-over svg {
+        width: 40px;
+        height: 40px;
     }
 
     @keyframes jump {
@@ -325,6 +339,84 @@ body {
         }
         60%{
             bottom: 120px;
+        }
+        100%{
+            bottom: 0;
+        }
+    }
+}
+
+/* Celular na horizontal: a limitação real aqui é a ALTURA da tela, não a largura,
+   então esse breakpoint é baseado em max-height + orientation em vez de max-width */
+@media (max-height: 500px) and (orientation: landscape) {
+    body {
+        padding: 5px;
+    }
+
+    .game-box {
+        width: min(85%, 650px);
+        height: 82vh;
+        margin: 4px auto;
+        border: 4px solid #000000;
+    }
+
+    .mario {
+        width: 85px;
+    }
+
+    .mario.mario-dead {
+        width: 42px;
+        margin-left: 28px;
+    }
+
+    .pipe {
+        width: 48px;
+        animation-duration: 1.7s;
+    }
+
+    .nuvens {
+        width: 220px;
+    }
+
+    .score-board {
+        top: 5px;
+        left: 5px;
+        gap: 2px;
+    }
+
+    #current-score, #high-score-display {
+        font-size: 13px;
+    }
+
+    .game-over {
+        width: 210px;
+        padding: 15px;
+    }
+
+    .game-over h1 {
+        font-size: 26px;
+        width: auto;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    .game-over svg {
+        width: 44px;
+        height: 44px;
+    }
+
+    @keyframes jump {
+        0%{
+            bottom: 0;
+        }
+        40%{
+            bottom: 100px;
+        }
+        50%{
+            bottom: 100px;
+        }
+        60%{
+            bottom: 100px;
         }
         100%{
             bottom: 0;

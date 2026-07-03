@@ -1,4 +1,5 @@
-const mario = document.querySelector('.mario');
+const mario = document.querySelector('.mario:not(.mario-dead)');
+const marioDead = document.getElementById('mario-dead');
 const pipe = document.querySelector('.pipe');
 const clouds = document.querySelector('.nuvens');
 const currentScoreDisplay = document.getElementById('current-score');
@@ -68,7 +69,7 @@ const loopGame = () => {
         const pipeRect = pipe.getBoundingClientRect();
         // No celular o Mario e o cano ficam bem menores, então uma margem maior
         // é necessária pra não parecer injusto (senão quase todo "quase toque" conta como batida)
-        const margem = window.matchMedia('(max-width: 480px)').matches ? 22 : 10;
+        const margem = window.matchMedia('(max-width: 480px), (max-height: 500px) and (orientation: landscape)').matches ? 22 : 10;
 
         const colidiu =
             marioRect.right - margem > pipeRect.left &&
@@ -88,8 +89,9 @@ const loopGame = () => {
             mario.style.animation = 'none';
             mario.style.bottom = `${marioPosition}px`;
 
-            mario.src = './Img/game-over.png';
-            mario.classList.add('mario-dead');
+            mario.style.display = 'none';
+            marioDead.style.bottom = `${marioPosition}px`;
+            marioDead.classList.add('active');
 
             // Salvar recorde
             let finalScore = Math.floor(score / 10);
@@ -124,8 +126,8 @@ const restartGame = () => {
     clouds.style.left = '';
     mario.style.animation = '';
     mario.style.bottom = '0';
-    mario.src = './Img/mario.gif';
-    mario.classList.remove('mario-dead');
+    mario.style.display = '';
+    marioDead.classList.remove('active');
 
     // Resetar variáveis
     score = 0;
